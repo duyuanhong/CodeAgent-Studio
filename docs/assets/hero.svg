@@ -1,0 +1,87 @@
+<svg width="1440" height="500" viewBox="0 0 1440 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1440" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#090B0E"/>
+      <stop offset="1" stop-color="#0D1116"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#E0A16F"/>
+      <stop offset="1" stop-color="#B87548"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="26" flood-color="#000000" flood-opacity="0.40"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="500" rx="18" fill="url(#bg)"/>
+  <rect x="1" y="1" width="1438" height="498" rx="17" stroke="#20262D"/>
+  <circle cx="54" cy="42" r="5" fill="#7A4E3A"/>
+  <circle cx="72" cy="42" r="5" fill="#796338"/>
+  <circle cx="90" cy="42" r="5" fill="#3E654B"/>
+  <text x="119" y="47" fill="#C7CCD3" font-size="15" font-family="Inter, Segoe UI, sans-serif" font-weight="600">CodeAgent Studio</text>
+  <text x="1250" y="47" fill="#6E7782" font-size="12" font-family="SFMono-Regular, Consolas, monospace">runtime online</text>
+  <circle cx="1234" cy="42" r="4" fill="#79C790"/>
+  <path d="M32 70H1408" stroke="#1D232A"/>
+
+  <g transform="translate(58 118)">
+    <rect width="660" height="286" rx="10" fill="#0B0E12" stroke="#20262D" filter="url(#shadow)"/>
+    <rect width="660" height="38" rx="10" fill="#0E1217"/>
+    <path d="M0 38H660" stroke="#1D232A"/>
+    <circle cx="26" cy="19" r="3" fill="#D09461"/>
+    <text x="40" y="24" fill="#AAB1BA" font-size="12" font-family="SFMono-Regular, Consolas, monospace">src/codeagent/runtime.py</text>
+    <rect x="18" y="58" width="68" height="208" rx="5" fill="#0E1115"/>
+    <text x="31" y="80" fill="#5D6570" font-size="10" font-family="SFMono-Regular, Consolas, monospace">EXPLORER</text>
+    <rect x="29" y="99" width="45" height="5" rx="2.5" fill="#39404A"/>
+    <rect x="29" y="116" width="35" height="5" rx="2.5" fill="#2D343D"/>
+    <rect x="29" y="133" width="42" height="5" rx="2.5" fill="#2D343D"/>
+    <rect x="29" y="150" width="31" height="5" rx="2.5" fill="#2D343D"/>
+    <rect x="29" y="167" width="48" height="18" rx="3" fill="#151A20"/>
+    <rect x="29" y="174" width="36" height="5" rx="2.5" fill="#D09461" fill-opacity="0.75"/>
+    <rect x="111" y="63" width="516" height="190" rx="5" fill="#090B0E"/>
+    <text x="131" y="91" fill="#646D79" font-size="11" font-family="SFMono-Regular, Consolas, monospace">01</text>
+    <text x="165" y="91" fill="#9E7A61" font-size="11" font-family="SFMono-Regular, Consolas, monospace">class</text>
+    <text x="202" y="91" fill="#D9DDE5" font-size="11" font-family="SFMono-Regular, Consolas, monospace">AgentRuntime:</text>
+    <text x="131" y="116" fill="#646D79" font-size="11" font-family="SFMono-Regular, Consolas, monospace">02</text>
+    <text x="165" y="116" fill="#788CA8" font-size="11" font-family="SFMono-Regular, Consolas, monospace">async def</text>
+    <text x="225" y="116" fill="#C8CCD2" font-size="11" font-family="SFMono-Regular, Consolas, monospace">run(self, prompt):</text>
+    <text x="131" y="141" fill="#646D79" font-size="11" font-family="SFMono-Regular, Consolas, monospace">03</text>
+    <text x="190" y="141" fill="#777F89" font-size="11" font-family="SFMono-Regular, Consolas, monospace">response = await self.provider.complete(...)</text>
+    <text x="131" y="166" fill="#646D79" font-size="11" font-family="SFMono-Regular, Consolas, monospace">04</text>
+    <text x="190" y="166" fill="#777F89" font-size="11" font-family="SFMono-Regular, Consolas, monospace">for call in response.tool_calls:</text>
+    <rect x="184" y="181" width="328" height="24" rx="4" fill="#17130F" stroke="#4A3425"/>
+    <text x="198" y="197" fill="#D09461" font-size="10" font-family="SFMono-Regular, Consolas, monospace">permission → hooks → tool registry</text>
+    <text x="131" y="227" fill="#646D79" font-size="11" font-family="SFMono-Regular, Consolas, monospace">05</text>
+    <text x="190" y="227" fill="#777F89" font-size="11" font-family="SFMono-Regular, Consolas, monospace">messages.append(tool_result)</text>
+  </g>
+
+  <g transform="translate(748 118)">
+    <rect width="634" height="286" rx="10" fill="#0B0E12" stroke="#20262D" filter="url(#shadow)"/>
+    <rect width="634" height="38" rx="10" fill="#0E1217"/>
+    <path d="M0 38H634" stroke="#1D232A"/>
+    <text x="18" y="24" fill="#C7CCD3" font-size="12" font-family="Inter, Segoe UI, sans-serif" font-weight="600">Runtime Trace</text>
+    <text x="508" y="24" fill="#67707B" font-size="10" font-family="SFMono-Regular, Consolas, monospace">18 events</text>
+    <text x="574" y="24" fill="#67707B" font-size="10" font-family="SFMono-Regular, Consolas, monospace">5 tools</text>
+    <path d="M40 72V250" stroke="#2C333C"/>
+    <circle cx="40" cy="78" r="8" fill="#141920" stroke="#3C4652"/>
+    <text x="63" y="82" fill="#D4D8DE" font-size="11" font-family="Inter, Segoe UI, sans-serif" font-weight="600">Model turn 1</text>
+    <text x="471" y="82" fill="#5F6874" font-size="10" font-family="SFMono-Regular, Consolas, monospace">1,305 in</text>
+    <circle cx="40" cy="120" r="8" fill="#19150F" stroke="#6E4830"/>
+    <text x="63" y="124" fill="#D09461" font-size="11" font-family="Inter, Segoe UI, sans-serif" font-weight="600">Permission gate</text>
+    <text x="471" y="124" fill="#7E654F" font-size="10" font-family="SFMono-Regular, Consolas, monospace">allow</text>
+    <circle cx="40" cy="162" r="8" fill="#12181A" stroke="#375747"/>
+    <text x="63" y="166" fill="#C4D5C9" font-size="11" font-family="Inter, Segoe UI, sans-serif" font-weight="600">read_file</text>
+    <rect x="151" y="151" width="285" height="22" rx="4" fill="#0E1215" stroke="#242B32"/>
+    <text x="162" y="165" fill="#6E7782" font-size="9" font-family="SFMono-Regular, Consolas, monospace">src/codeagent/runtime.py</text>
+    <circle cx="40" cy="204" r="8" fill="#12181A" stroke="#375747"/>
+    <text x="63" y="208" fill="#C4D5C9" font-size="11" font-family="Inter, Segoe UI, sans-serif" font-weight="600">grep</text>
+    <rect x="108" y="193" width="328" height="22" rx="4" fill="#0E1215" stroke="#242B32"/>
+    <text x="119" y="207" fill="#6E7782" font-size="9" font-family="SFMono-Regular, Consolas, monospace">"execute_tool" · 7 matches</text>
+    <circle cx="40" cy="246" r="8" fill="#111A14" stroke="#3F6B4B"/>
+    <text x="63" y="250" fill="#79C790" font-size="11" font-family="Inter, Segoe UI, sans-serif" font-weight="600">Run completed</text>
+    <text x="471" y="250" fill="#65866E" font-size="10" font-family="SFMono-Regular, Consolas, monospace">13 tests</text>
+  </g>
+
+  <text x="58" y="451" fill="#F0F2F5" font-size="31" font-family="Inter, Segoe UI, sans-serif" font-weight="700" letter-spacing="-0.5">CodeAgent Studio</text>
+  <text x="345" y="450" fill="#707986" font-size="15" font-family="Inter, Segoe UI, sans-serif">observable harness · permissioned tools · resumable workflows · WebSocket trace</text>
+  <rect x="1244" y="431" width="138" height="32" rx="6" fill="url(#accent)"/>
+  <text x="1271" y="451" fill="#17110C" font-size="12" font-family="Inter, Segoe UI, sans-serif" font-weight="700">AGENT RUNTIME</text>
+</svg>

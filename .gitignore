@@ -1,0 +1,16 @@
+.env
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+
+.codeagent/sessions/
+.codeagent/tasks.json
+.codeagent/todos.json
+.codeagent/memory.json
+.codeagent/workflow_runs/

@@ -1,0 +1,11 @@
+steps:
+  - id: inspect
+    type: agent
+    kind: reviewer
+    prompt: "Review {{args.target}}. Focus on correctness, security, and missing tests."
+
+  - id: tests
+    type: tool
+    tool: bash
+    args:
+      command: "pytest -q"

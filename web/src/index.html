@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0d10" />
+  <meta name="description" content="CodeAgent Studio — observable coding-agent runtime and Web IDE." />
+  <title>CodeAgent Studio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="topbar">
+      <div class="window-controls" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="repo-crumb"><span id="repo-name" class="repo-name">codeagent-harness</span><span class="muted-separator">/</span><span class="repo-section">main</span></div>
+      <div class="topbar-center"><button id="command-trigger" class="command-trigger"><span class="command-symbol">⌘</span><span>Jump to anything</span><kbd>⌘ K</kbd></button></div>
+      <div class="topbar-actions">
+        <span id="branch-chip" class="branch-chip">⑂ local</span>
+        <span id="connection-chip" class="connection-chip"><b></b><span>connecting</span></span>
+        <button id="toggle-terminal-top" class="icon-action" title="Toggle terminal" aria-label="Toggle terminal">▤</button>
+        <button class="model-select" title="Model"><span id="model-name">Demo Runtime</span><small>⌄</small></button>
+        <button id="run-top" class="run-button">▶ <span>Run</span></button>
+      </div>
+    </header>
+
+    <main id="workspace-grid" class="workspace-grid">
+      <nav class="activity-rail" aria-label="Workspace navigation">
+        <div class="rail-mark" aria-label="CodeAgent Studio">CA</div>
+        <div class="rail-group">
+          <button class="rail-button active" data-view="explorer" title="Explorer">▱</button>
+          <button class="rail-button" data-view="sessions" title="Sessions">◎</button>
+          <button class="rail-button" data-view="tasks" title="Tasks">☷</button>
+          <button class="rail-button" data-view="worktrees" title="Worktrees">⑂</button>
+          <button class="rail-button" data-view="workflows" title="Workflows">◇</button>
+        </div>
+        <div class="rail-spacer"></div>
+        <button class="rail-button" title="Search">⌕</button>
+        <button class="rail-button" title="Runtime capabilities">⊞</button>
+      </nav>
+
+      <div id="left-pane-wrap" class="left-pane-wrap open">
+        <aside class="left-pane">
+          <div class="pane-titlebar"><span id="left-title">Explorer</span><div class="pane-title-actions"><button id="left-new" title="New session" hidden>＋</button><button id="left-refresh" title="Refresh">↻</button><button title="More">•••</button></div></div>
+          <div id="left-content" class="left-content"></div>
+        </aside>
+      </div>
+
+      <div id="center-stack" class="center-stack terminal-open">
+        <section class="editor-shell">
+          <div class="editor-tabs"><div id="editor-tabs" class="tabs-scroll"><span class="tab-placeholder">No file open</span></div><div class="editor-tabs-actions"><button id="review-diff" title="Review diff">⇄</button><button title="Split editor">▥</button><button title="More">•••</button></div></div>
+          <div class="editor-breadcrumbbar"><div id="breadcrumbs" class="breadcrumbs"></div><div class="editor-meta"><span id="dirty-label" class="dirty-label" hidden>modified</span><button id="save-file" disabled>⌘ Save <kbd>⌘S</kbd></button></div></div>
+          <div class="editor-area">
+            <div id="editor-empty" class="editor-empty"><div class="empty-mark">CA</div><h2>Open a file to inspect the runtime</h2><p>Use the Explorer or press <kbd>⌘K</kbd> to jump to a file or action.</p></div>
+            <div id="code-editor" class="code-editor" hidden>
+              <div id="line-gutter" class="line-gutter" aria-hidden="true"></div>
+              <div class="code-layer-wrap">
+                <pre id="highlight-layer" class="highlight-layer"><code id="highlight-code"></code></pre>
+                <textarea id="code-input" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="Code editor"></textarea>
+              </div>
+            </div>
+            <div id="diff-view" class="diff-view" hidden><div class="diff-column"><div class="diff-heading">HEAD</div><pre id="diff-original"></pre></div><div class="diff-column"><div class="diff-heading">WORKTREE</div><pre id="diff-modified"></pre></div></div>
+          </div>
+          <div class="editor-footnote"><span id="editor-file-label">No file</span><span id="editor-language">plaintext</span><span>UTF-8</span></div>
+        </section>
+
+        <section id="terminal-panel" class="terminal-panel">
+          <div class="terminal-header"><div class="terminal-tabs"><button class="active">▣ Terminal <span class="count-badge">1</span></button><button>Problems <span>0</span></button><button>Output</button></div><div class="terminal-actions"><button title="New terminal">＋</button><button id="terminal-clear" title="Clear">⌫</button><button title="Maximize">□</button><button id="terminal-close" title="Close">×</button></div></div>
+          <div id="terminal-body" class="terminal-body"><div>CodeAgent local terminal</div><div>Type a command and press Enter. Destructive commands are blocked here.</div><form id="terminal-form" class="terminal-input-line"><span>❯</span><input id="terminal-input" autocomplete="off" aria-label="Terminal command"/><span id="terminal-running" class="terminal-running"></span></form></div>
+          <div class="terminal-footer"><span>shell</span><span>⌄</span><span class="terminal-spacer"></span><span>workspace · local</span></div>
+        </section>
+      </div>
+
+      <aside class="agent-panel">
+        <div class="agent-header"><div class="agent-heading"><span class="agent-mark">⌁</span><div><strong>Agent Console</strong><span id="agent-state-label">Ready</span></div></div><div class="agent-header-actions"><button id="new-session" title="New session">＋</button><button title="Search">⌕</button><button title="More">•••</button></div></div>
+        <div class="agent-tabs" role="tablist"><button class="active" data-agent-tab="agent">Agent</button><button data-agent-tab="trace">Trace <span id="trace-count">0</span></button><button data-agent-tab="inspect">Inspect</button></div>
+        <div id="agent-scroll" class="agent-scroll">
+          <div id="agent-view" class="agent-view"></div>
+          <div id="trace-view" class="trace-view" hidden></div>
+          <div id="inspect-view" class="inspect-view" hidden></div>
+        </div>
+        <div id="permission-slot"></div>
+        <form id="agent-form" class="agent-composer">
+          <div id="goal-field" class="goal-field" hidden><span>◎</span><input id="goal-input" placeholder="Completion condition, e.g. pytest exits with code 0"/><button id="goal-close" type="button">×</button></div>
+          <textarea id="agent-input" rows="3" placeholder="Ask CodeAgent to inspect, edit, test…"></textarea>
+          <div class="composer-toolbar"><div class="composer-left"><button type="button" title="Attach context">⌁</button><button id="goal-toggle" type="button" title="Set completion goal">◎</button><button type="button" class="mode-button">Code <span>⌄</span></button></div><button id="agent-send" type="submit" class="send-button">↑</button></div>
+        </form>
+      </aside>
+    </main>
+
+    <footer class="statusbar"><span id="status-branch">⑂ local</span><span id="buffer-status">✓ clean buffer</span><span>◇ permission gate</span><span class="status-spacer"></span><span id="runtime-status">● connecting</span><span id="tool-status">0 tools</span><span id="provider-status">local</span><span id="socket-status">WebSocket</span></footer>
+  </div>
+
+  <div id="palette-backdrop" class="palette-backdrop" hidden>
+    <div class="command-palette" role="dialog" aria-modal="true" aria-label="Command palette">
+      <div class="palette-search"><span>⌕</span><input id="palette-input" placeholder="Search files and actions"/><kbd>esc</kbd></div>
+      <div id="palette-content" class="palette-content"></div>
+      <div class="palette-footer"><span>⌘ CodeAgent Studio</span><span>↑↓ navigate · ↵ open</span></div>
+    </div>
+  </div>
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="vendor/prism.js"></script>
+  <script src="vendor/prism-python.min.js"></script>
+  <script src="vendor/prism-json.min.js"></script>
+  <script src="vendor/prism-bash.min.js"></script>
+  <script src="vendor/prism-markdown.min.js"></script>
+  <script src="vendor/prism-yaml.min.js"></script>
+  <script src="vendor/prism-typescript.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
